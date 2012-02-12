@@ -1,0 +1,2 @@
+$("div#transaction_<%= @transaction.id %>").replaceWith("<%= escape_javascript(render @transaction) %>");
+$("#errors").html("");

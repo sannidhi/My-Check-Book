@@ -1,0 +1,31 @@
+<%
+  if session[:user_id].nil?
+    redirect_to root_path, :notice => "Session timed out. Please login again."
+  end
+
+  user = User.find(session[:user_id])
+  if user.nil?
+    redirect_to root_path
+  end 
+%>
+
+<h3>Find Transactions</h3>
+
+<% form_tag user_transactions_path, :method => 'get', :remote => true do %>
+
+  <div class="field">
+    <%= text_field_tag :search, params[:search] %>
+    <span class="note">(e.g. #grocery, #bills etc)</span>
+  </div>
+  
+  <div class="action">
+    <%= submit_tag "Search", :name => nil %>  
+  </div>  
+
+<% end %>
+
+<div id="search_results"></div>
+
+<p>
+  <%= link_to 'Back', user_path(@user) %>
+</p>

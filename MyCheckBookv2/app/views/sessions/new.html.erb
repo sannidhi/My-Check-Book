@@ -1,0 +1,23 @@
+<h1>MyCheckBook</h1>
+
+<h2>Login</h2>
+
+<%= form_tag session_path do %>
+
+<div class="field">
+  <%= label_tag :username %>
+  <%= text_field_tag :username %>
+</div>
+<div class="field">
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+</div>
+<div class="actions">
+  <%= submit_tag 'Login' %>
+</div>
+
+<hr />
+
+<h2><%= link_to 'Register now!', new_user_path %></h2>
+
+<% end %>

@@ -1,0 +1,5 @@
+<% if @transactions.count == 0 %>
+  $("#search_results").text("No transactios found.");
+<% else %>
+  $('#search_results').html("<%= escape_javascript(render(@transactions)) %>");
+<% end %>

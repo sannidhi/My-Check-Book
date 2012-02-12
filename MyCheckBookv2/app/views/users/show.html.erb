@@ -1,0 +1,49 @@
+<script type="text/javascript">
+  
+  $(function() {
+    
+    $("div#transaction_form").hide();
+    
+    $("#show_form").click(function(){
+        $("div#transaction_form").show("slow");
+    });
+
+    $("#hide_form").click(function() {
+        $("div#transaction_form").hide("slow");
+    });
+    
+  });  
+  
+</script>
+
+<p id="notice"><%= notice %></p>
+
+<h2>Welcome <%= @user.username %>!</h2>
+
+<h4><a id="show_form" href="#">Create a new transaction</a></h4>
+<div id="transaction_form">
+  <span class="command_small"><a id="hide_form" href="#">hide form</a></span>  
+  <%= render :file => 'transactions/new' %>  
+</div>
+
+<hr />
+
+<h4>My transactions</h4>
+<p id="errors"></p>
+<div id="transaction_list">
+<%= render @user.transactions.all(:order => 'transaction_date DESC') %>
+</div>
+
+<h5>
+  <%= link_to 'Find Transactions', user_transactions_path(@user) %> |
+  <%= link_to 'Visualize history', history_path(@user) %>
+</h5>
+
+<hr />
+
+<h4>
+  <%= link_to 'My Tags', user_tags_path(@user) %> |
+  <%= link_to 'Search Transactions', user_transactions_path(@user) %>
+</h4>
+
+<%= link_to 'Logout', logout_path %>

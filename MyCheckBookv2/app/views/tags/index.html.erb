@@ -1,0 +1,20 @@
+<%
+  if session[:user_id].nil?
+    redirect_to root_path, :notice => "Session timed out. Please login again."
+  end
+
+  user = User.find(session[:user_id])
+  if user.nil?
+    redirect_to root_path
+  end 
+%>
+<h2>Tags for <%= user.username %></h2>
+<% if @user.tags.all.count == 0 %>
+<p>No tags created so far.</p>
+<% else %>
+<%= render @user.tags.all %>
+<% end %>
+
+<br />
+
+<%= link_to 'Back', @user %>

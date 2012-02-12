@@ -1,0 +1,72 @@
+.transaction_item {
+  margin-top: 0.75em;
+  background-color: #ededed;
+}
+
+.transaction_date, .transaction_description {
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.transaction_description {
+  width: 300px;
+}
+
+.transaction_type_debit, .transaction_type_credit {
+  float: left;
+  width: 60px;
+  text-align: right;
+}
+
+.transaction_type_debit:before, .transaction_type_credit:before {
+  content: "$";
+}
+
+.transaction_type_debit {
+  color: red;
+}
+
+.transaction_type_credit {
+  color: green;
+}
+
+.transaction_tags {
+  float: left;
+  width: 300px;
+  margin-left: 25px;
+  margin-right: 20px;  
+}
+
+.action_edit, .action_delete {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+span.note {
+  font-size: 75%;
+  font-style: italic;
+}
+
+#search_results {
+  margin-top: 20px;
+}
+
+#transaction_form {
+  margin-bottom: 20px;
+}
+
+.command_small {
+  font-size: 75%;
+  font-style: italic;
+}
+
+.transaction_edit {
+  display: none;
+  background-color: #efefef;
+  width: 450px;
+  padding: 10px;
+}
+
+

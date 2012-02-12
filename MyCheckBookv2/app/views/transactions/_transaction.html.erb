@@ -1,0 +1,74 @@
+<%= div_for transaction do %>
+
+  <div id="show_transaction_<%= transaction.id %>" class="transaction_item">
+    
+    <span class="transaction_date"><%= transaction.transaction_date %></span>
+    <span class="transaction_description" id="t_description"><%= transaction.description %></span>
+    
+    <% if transaction.amount < 0 %>
+      <span class="transaction_type_debit">
+    <% else %>
+      <span class="transaction_type_credit">
+    <% end %>
+    <%= transaction.amount.abs %>
+    </span>
+    
+    <span class="transaction_tags">
+      <%
+        str = "" 
+        transaction.tags.each { |tag| str << " #" << tag.tag_name }
+        str.strip! 
+      %>    
+      <%= str %>
+    </span>
+    
+    <span class="actions">
+      <a href="#" 
+        onClick="swapDisplay('#show_transaction_<%= transaction.id %>', '#edit_transaction_<%= transaction.id %>'); return false;">
+        Edit
+      </a>    
+    </span>
+    
+    <span class="actions">    
+      <%= link_to "X",user_transaction_path(:user_id => @user, :id => transaction), 
+      { :method => :delete, :remote => true, :confirm => "Are you sure you want to delete this transaction?" } %>
+    </span>
+    
+  </div>
+  
+  <div id="edit_transaction_<%= transaction.id %>" class="transaction_edit">
+    
+    <% form_for transaction, :url => user_transaction_path(:user_id => @user, :id => transaction),
+                :remote => true do |f| %>
+    
+      <div class="field">
+      <%= f.label :transaction_date %><br />
+      <%= f.date_select :transaction_date %>
+      </div>
+      <div class="field">
+        <%= f.label :amount %><br />
+        <%= f.text_field :amount %>
+      </div>
+      <div class="field">
+        <%= f.label :description %><br />
+        <%= f.text_area :description, :rows => 3, :columns => 50 %>
+      </div>
+      
+      <div class="action">
+        <%= f.submit 'Update Transaction', :name => nil,
+          :onclick => "swapDisplay('#edit_transaction_#{transaction.id}', '#show_transaction_#{transaction.id}');" %>
+          
+        <button onclick="swapDisplay('#edit_transaction_<%= transaction.id %>', '#show_transaction_<%= transaction.id %>'); return false;">
+          Cancel
+        </button>
+      </div>
+      
+      
+        
+    <% end %>
+    
+  </div>
+
+  
+
+<% end %>

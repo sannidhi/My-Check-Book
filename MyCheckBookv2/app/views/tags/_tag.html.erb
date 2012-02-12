@@ -1,0 +1,6 @@
+<%= div_for tag do %>
+
+  <span class="tag_name"><%= tag.tag_name %></span>
+  <span class="tag_date"><%= tag.created_at %></span>
+  <span class="tag_transactions"><%= pluralize(tag.transactions.all.count, 'Transaction') %></span>
+<% end %>

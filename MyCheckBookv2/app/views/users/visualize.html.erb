@@ -1,0 +1,52 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  
+  // Load the Visualization API and the piechart package.
+  google.load('visualization', '1', {'packages':['corechart']});
+  
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.setOnLoadCallback(drawChart);
+  
+  // Callback function which runs when the API is loaded.
+  function drawChart() {
+    
+    <% if @monthly_balances.empty? %>
+      $("#balance_chart").text("No transaction history present.");
+    
+    <% else %>
+    
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Month');
+      data.addColumn('number', 'Balance');
+      
+      <% @monthly_balances.each do |month, balance| %>
+      data.addRow(['<%= month %>', <%= balance %>]);
+      <% end %>
+      
+      var chart = new google.visualization.BarChart(document.getElementById('balance_chart'));
+      var options = {
+        width: 500,
+        height: 300,
+        title: 'History of balance over time'
+      }
+      chart.draw(data, options);
+    
+    <% end %>
+    
+  }
+  
+</script>
+
+<% @monthly_balances.each do |month, balance| %>
+<p>
+  <%= month %> : <%= balance %>
+</p>
+<% end %>
+
+<h3>Balance History</h3>
+
+<div id="balance_chart"></div>
+
+<p>
+  <%= link_to 'Back', user_path(@user) %>
+</p>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MyCheckBookv2</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js' %>
+  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js' %>
+  <%= javascript_include_tag 'jquery.jeditable' %>
+  <%= javascript_include_tag 'rails', 'application' %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>
